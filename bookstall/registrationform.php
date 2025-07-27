@@ -133,7 +133,7 @@
 <?php
 $host='127.0.0.1';
 $user='root';
-$pass='Bhuvitha@123';
+$pass='your_db_password';
 $db='lab';
 $conn=new mysqli($host,$user,$pass,$db);
 if($conn->connect_error){
