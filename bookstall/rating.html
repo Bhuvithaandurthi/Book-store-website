@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-image: url("image.jpeg");
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color:palegreen;
+        }
+        .review-card {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .stars {
+            color: gold;
+        }
+        .star {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .star:hover {
+            color: orange;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Book Reviews</h2>
+
+    <div id="reviews"></div>
+
+    <h3>Leave a Review</h3>
+    <input type="text" id="name" placeholder="Your Name">
+    
+    <div id="rating">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <textarea id="comment" placeholder="Write your review..."></textarea>
+    <button onclick="submitReview()">Submit Review</button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", loadReviews);
+    
+    let selectedRating = 0;
+
+    document.querySelectorAll(".star").forEach(star => {
+        star.addEventListener("click", function() {
+            selectedRating = this.getAttribute("data-value");
+            highlightStars(selectedRating);
+        });
+    });
+
+    function highlightStars(rating) {
+        document.querySelectorAll(".star").forEach(star => {
+            star.style.color = star.getAttribute("data-value") <= rating ? "gold" : "gray";
+        });
+    }
+
+    function submitReview() {
+        let name = document.getElementById("name").value;
+        let comment = document.getElementById("comment").value;
+
+        if (!name || !comment || selectedRating === 0) {
+            alert("Please fill in all fields and select a rating.");
+            return;
+        }
+
+        let review = { name, rating: selectedRating, comment };
+        let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        reviews.push(review);
+        localStorage.setItem("reviews", JSON.stringify(reviews));
+
+        document.getElementById("name").value = "";
+        document.getElementById("comment").value = "";
+        selectedRating = 0;
+        highlightStars(0);
+
+        loadReviews();
+    }
+
+    function loadReviews() {
+        let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        let reviewsContainer = document.getElementById("reviews");
+        reviewsContainer.innerHTML = "";
+
+        reviews.forEach(review => {
+            let reviewElement = document.createElement("div");
+            reviewElement.classList.add("review-card");
+            reviewElement.innerHTML = `
+                <strong>${review.name}</strong> - 
+                <span class="stars">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</span>
+                <p>${review.comment}</p>
+            `;
+            reviewsContainer.appendChild(reviewElement);
+        });
+    }
+</script>
+
+</body>
+</html>

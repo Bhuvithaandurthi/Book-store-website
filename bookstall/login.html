@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head><title>login details</title>
+<style>
+    body{
+        background-color:color-mix(in hsl decreasing hue, skyblue 40%, white 30%);
+    }
+    h1{
+        font-size: larger;
+        font-weight: bold;
+        color: black;
+    }
+   input[type="reset"]{
+        
+        background-color: darkolivegreen;
+        color:black;
+        width:100px;
+        height:40px;
+    }
+    input[type="button"]
+     {
+        background-color: blue;
+        color:beige;
+        width:200px;
+        height:40px;
+     }
+    fieldset{
+        margin-left:300px;
+        margin-right:400px;
+        margin-top: 10px;
+        background-color: darkseagreen;
+    }
+    form{
+        padding:20px;
+    }
+
+</style>
+
+<script>
+    function validateLogin() {
+        let valid="true";
+        const username = document.getElementById("user").value.trim();
+        const password = document.getElementById("pass").value.trim();
+           let str="";
+        if (username === "") {
+            valid="false";
+            str+="Username cannot be empty!\n";
+          //  return;
+        }
+
+        if (password === "") {
+            valid="false";
+            str+="Password cannot be empty!\n";
+           // return;
+        }
+
+        if (password.length < 6) {
+            valid="false";
+            str+="Password must be at least 6 characters long!\n";
+           // return;
+        }
+        if(valid!=true){
+            alert(str);
+        }
+        else{
+
+        alert("Login successful! ");}
+    }
+</script>
+</head>
+<center><body>
+    <h1>ENTER YOUR LOGIN DETAILS</h1>
+    <fieldset border="2px solid black">
+    <form>
+        <label for="user">USERNAME:</label>
+        <input type="text" id="user"><br><br>
+        <label for="pass">PASSWORD:</label>
+        <input type="password" id="pass"><br><br>
+        <input type="button" value="SIGN IN" onclick="validateLogin()">
+        <input type="reset" value="RESET">
+
+
+
+    </form>
+    </fieldset><br><br><br><br>
+    
+    <marquee scrollamount="20px" bgcolor="white" behaviour="alternate"><h3>Login details are your credentials for using this website. You are supposed to remember the credentials</h3></marquee>
+    
+
+</body></center>
+</html>

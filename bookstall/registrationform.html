@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head><title>registration form for book stall</title>
+<style>
+    body{
+        background-image: url('Screenshot from 2025-03-06 23-45-56.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    form label{
+        flex:1 ;
+        line-height: 50px;
+        text-align: center;
+     }
+     input{
+        flex: 1;
+     }
+    input[type="button"]{
+        display: flex;
+      
+        gap:100px;
+    }
+    fieldset{
+        margin-left: 500px;
+        margin-right: 500px;
+        background-color: darkgoldenrod;
+        
+    }
+    button{
+        background-color:forestgreen;
+        color:black;
+        width:100px;
+        height:50px;
+    }
+    .container{
+        display: flex;
+        flex-direction:column;
+        gap:20px;
+    
+    }
+    h1{
+        color:gold;
+    }
+</style>
+<script>
+    function validateForm() {
+        event.preventDefault(); // prevent form submission
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("emailid").value.trim();
+        const password = document.getElementById("pass").value.trim();
+        const mobile = document.getElementById("mobile").value.trim();
+        const address = document.getElementById("add").value.trim();
+        const gender = document.querySelector('input[name="gender"]:checked');
+        const role = document.querySelector('select').value;
+
+        if (name === "") {
+            alert("Name is required.");
+            return;
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters.");
+            return;
+        }
+
+        if (!/^\d{10}$/.test(mobile)) {
+            alert("Please enter a valid 10-digit mobile number.");
+            return;
+        }
+
+        if (address === "") {
+            alert("Address is required.");
+            return;
+        }
+
+        if (!gender) {
+            alert("Please select your gender.");
+            return;
+        }
+
+        if (role === " ") {
+            alert("Please select your role.");
+            return;
+        }
+
+        alert("Registration successful!");
+        // You can now submit or process the data
+    }
+</script>
+</head>
+<center><body>
+     <h1>REGISTRATION DETAILS</h1>
+     <fieldset border="5 solid black">
+    <form class="conatainer" action="" method="POST">
+        <label for="name">NAME:</label>
+        <input type="text" id="name"><br>
+        <label for="emailid">EMAIL:</label>
+        <input type="email" id="emailid"><br>
+        <label for="pass">PASSWORD:</label>
+        <input type="password" id="pass"><br>
+        <label for="mobile">MOBILE NO:</label>
+        <input type="NUMBER" id="mobile"><br>
+        <label for="add">ADDRESS:</label>
+        <input type="text" id="add"><br>
+        <label for="gender" type="text">GENDER:</label>
+        <input type="radio" name="gender" value="MALE">MALE
+        <input type="radio" name="gender" value="FEMALE">FEMALE<br>
+        <label for="sel" id="role">ROLE:</label>
+        <select>
+        <option value=" ">select your role</option>
+        <option value="STUDENT">STUDENT</option>
+        <option value="FACULTY">FACULTY</option>
+        <option value="OTHER">OTHER</option>
+
+        </select><br><br>
+        <button type="submit" onclick="validateForm()">SUBMIT</button>
+        <button type="reset">RESET</button>
+        
+
+
+
+    </form>
+    </fieldset>
+</body></center>
+</html>
+<?php
+$host='127.0.0.1';
+$user='root';
+$pass='Bhuvitha@123';
+$db='lab';
+$conn=new mysqli($host,$user,$pass,$db);
+if($conn->connect_error){
+   echo "connect error";
+}
+else{
+ echo "connected";
+}
+// Server-side form validation
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST['name']);
+    $email = trim($_POST['emailid']);
+    $password = trim($_POST['pass']);
+    $mobile = trim($_POST['mobile']);
+    $address = trim($_POST['add']);
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $role =($_POST['role']);
+    echo $role;
+    $sql = "INSERT INTO reg (name, email, password, mobile, address, gender, role)
+    VALUES ('$name', '$email', '$pass', '$mobile', '$address', '$gender', '$role');";
+
+ if ($conn->query($sql) === TRUE) {
+echo "Registration successful!";
+} else {
+echo "Error: " . $sql . "<br>" . $conn->error;
+} 
+$conn->close();
+}
+?>

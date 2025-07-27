@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>new page</title>
+    <style>
+        *{
+            margin:0px;
+            padding:0px;
+        }
+        .con{
+            display:grid;
+            height:100vh;
+            width:100vw;
+            
+        
+         grid-template-rows:20% 80% ;
+        }
+        #one{
+        
+            background-color: GREY;
+            float:right;
+            font-size: large;
+            color:black;
+
+         }
+        
+       
+         a{
+            margin-left:70px;
+            margin-bottom:20px;
+            text-decoration: none;
+            color:black;
+            font-weight: bolder;
+         }
+          #two{
+            display:grid;
+            grid-template-columns: 10% 80%;
+            width:100vw;
+           
+        }
+        #in1{
+            background-color: grey;
+        }
+        INPUT{
+            background-color: black;
+            color:white;
+            width:120px;
+            height:70px;
+            border-radius: 30px;
+            margin-top:15px;
+            margin-left:5px;
+
+        }
+        iframe{
+            height: 100vh;
+            width:100vw;
+            margin:0px;
+            border:none;
+            padding:0px;
+            margin-right:50px;
+        }
+        h3{
+            color:black;
+            font-weight: bold;
+            text-align:center;
+            font-size: larger;
+        }
+
+    </style>
+</head>
+    <body>
+        <script src="newjs.js"></script>
+    <div class="con">
+        <div id="one">
+           
+            <center><h2 STYLE="color:goldenrod;font-size: xx-large;margin-top: 0px;">ONLINE BOOK STORE</h2></center>
+            
+            <a href="#" onclick="fun1('home.html')">HOME</a>
+            <a href="#" onclick="fun1('login.html')">LOGIN</a>
+            <a href="#" onclick="fun1('aboutus.html')">ABOUT US</a>
+            <a href="#" onclick="fun1('registrationform.php')">REGISTER</a>
+            <a href="#" onclick="fun1('newcatalogue.html')">CATALOGUE</a>
+            <a href="#" onclick="fun1('contactus.html')">CONTACT US</a>
+            <a href="#" style="color:midnightblue" onclick="fun1('rating.html')">REVIEW&RATING</a><br><br>
+            <h3>Read,Imagine&Explore!!!</h3>
+        </div>
+     <div id="two">
+        <div id="in1">
+            <form onsubmit="return false;">
+                <input type="submit" value="CSE" id="newcse" onclick="info('newcse.html')"><br>
+                <input type="submit" value="EEE" id="neweee" onclick="info('neweee.html')" ><br>
+                <input type="submit" value="ECE" id="newece" onclick="info('eee.html')"><br>
+                <input type="submit" value="CIVIL" id="newcivil" onclick="info('civil.html')"><br>
+                <input type="submit" value="MECH" id="newmech" onclick="info('mech.html')"><br>
+                <input type="submit" value="MME" id="newmech" onclick="info('mme.html')"><br>
+                <input type="submit" value="CHEM" id="newmech" onclick="info('chem.html')"><br>
+            </form>
+
+        </div>
+        <div id="in2">
+            <iframe src="home.html" id="iframe"></iframe>
+
+        </div>
+
+     </div>
+    </div>
+    
+
+    </body>
+    
+</html>
